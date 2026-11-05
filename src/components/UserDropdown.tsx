@@ -19,7 +19,6 @@ const UserDropdown = () => {
 
   const initials = displayName.charAt(0).toUpperCase();
 
-  // Sign out handler
   const handleSignOut = async () => {
     if (isSigningOut) return;
 
@@ -44,7 +43,7 @@ const UserDropdown = () => {
     }
   };
 
-  // Loading state
+ 
   if (isPending) {
     return (
       <div className="flex items-center justify-center px-3">
@@ -55,7 +54,7 @@ const UserDropdown = () => {
 
   return (
     <div className="dropdown dropdown-end">
-      {/* Dropdown Trigger */}
+      
       <button
         type="button"
         tabIndex={0}
@@ -64,7 +63,7 @@ const UserDropdown = () => {
       >
         {user ? (
           <>
-            {/* User Image */}
+            
             <div className="shrink-0">
               {user.image ? (
                 <Image
@@ -84,7 +83,7 @@ const UserDropdown = () => {
               )}
             </div>
 
-            {/* User Name */}
+            
             <span className="hidden truncate text-sm font-semibold sm:block">
               {displayName}
             </span>
@@ -110,14 +109,14 @@ const UserDropdown = () => {
         )}
       </button>
 
-      {/* Dropdown Menu */}
+     
       <ul
         tabIndex={0}
         className="dropdown-content menu z-50 mt-3 w-60 max-w-[calc(100vw-24px)] rounded-2xl border border-base-300 bg-base-100 p-2 shadow-xl"
       >
         {user ? (
           <>
-            {/* User Information */}
+            
             <li className="menu-title px-3 py-3">
               <div className="flex min-w-0 flex-col gap-1">
                 <span className="truncate text-sm font-bold text-base-content">
@@ -132,7 +131,7 @@ const UserDropdown = () => {
 
             <div className="divider my-0" />
 
-            {/* Profile */}
+           
             <li>
               <Link
                 href="/profile"
@@ -143,7 +142,7 @@ const UserDropdown = () => {
               </Link>
             </li>
 
-            {/* Sign Out */}
+            
             <li>
               <button
                 type="button"
@@ -166,7 +165,7 @@ const UserDropdown = () => {
             <li>
               <Link
                 href="/signin"
-                className="rounded-lg py-3 text-sm font-medium"
+                className="rounded-lg py-3 text-sm font-medium text-black"
               >
                 <span>🔐</span>
                 সাইন ইন

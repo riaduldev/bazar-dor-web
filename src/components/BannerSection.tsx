@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,8 +13,6 @@ const BannerSection = () => {
   return (
     <section className="bg-base-200 px-4 py-10 sm:py-14 lg:py-16">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-12">
-
-        {/* Left Content */}
         <div className="order-2 space-y-5 text-center md:order-1 md:text-left">
           <p className="inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-medium text-green-700">
             {todayDate}
@@ -26,9 +23,8 @@ const BannerSection = () => {
           </h2>
 
           <p className="mx-auto max-w-xl text-sm leading-7 text-base-content/70 sm:text-base md:mx-0">
-            চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম —
-            বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং
-            দামের পরিবর্তন এক জায়গায়।
+            চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
+            বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
 
           <div>
@@ -41,7 +37,6 @@ const BannerSection = () => {
           </div>
         </div>
 
-        {/* Right Image */}
         <div className="order-1 flex justify-center md:order-2">
           <Image
             src="/bazar-hero.png"
@@ -52,7 +47,6 @@ const BannerSection = () => {
             className="h-auto w-full max-w-md object-contain sm:max-w-lg md:max-w-full"
           />
         </div>
-
       </div>
     </section>
   );

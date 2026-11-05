@@ -79,7 +79,6 @@ function PriceItems({
 
         const arrow = isUp ? "▲" : isDown ? "▼" : "—";
 
-        // বাজারদর বাড়লে লাল, কমলে সবুজ
         const color = isUp
           ? "text-red-600"
           : isDown
@@ -89,7 +88,7 @@ function PriceItems({
         return (
           <Link
             key={`${duplicate ? "copy-" : ""}${product.id}`}
-            href={`/product/${product.slug}`}
+            href={`/products/${product.slug}`}
             tabIndex={duplicate ? -1 : undefined}
             className="price-marquee-item flex shrink-0 items-center gap-1.5 whitespace-nowrap text-[11px] sm:gap-2 sm:text-xs"
           >

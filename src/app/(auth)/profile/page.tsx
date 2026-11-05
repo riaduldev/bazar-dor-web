@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -9,7 +8,6 @@ const ProfilePage = () => {
 
   const user = session?.user;
 
-  // Loading state
   if (isPending) {
     return (
       <main className="min-h-screen bg-base-200 px-4 py-10">
@@ -27,15 +25,12 @@ const ProfilePage = () => {
     );
   }
 
-  // Not logged in
   if (!user) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-base-200 px-4">
         <div className="card w-full max-w-sm bg-base-100 shadow-sm">
           <div className="card-body items-center text-center">
-            <h2 className="text-xl font-bold">
-              Please Sign In
-            </h2>
+            <h2 className="text-xl font-bold">Please Sign In</h2>
 
             <p className="text-sm text-base-content/60">
               আপনার প্রোফাইল দেখতে প্রথমে সাইন ইন করুন।
@@ -58,9 +53,7 @@ const ProfilePage = () => {
       <div className="mx-auto max-w-lg">
         {/* Heading */}
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold">
-            আমার প্রোফাইল
-          </h1>
+          <h1 className="text-2xl font-bold">আমার প্রোফাইল</h1>
 
           <p className="mt-2 text-sm text-base-content/60">
             আপনার অ্যাকাউন্টের তথ্য এখানে দেখতে পারবেন।
@@ -77,17 +70,12 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            <h2 className="text-xl font-bold">
-              {userName}
-            </h2>
+            <h2 className="text-xl font-bold">{userName}</h2>
 
-            <p className="text-sm text-base-content/60">
-              BazarDor Member
-            </p>
+            <p className="text-sm text-base-content/60">BazarDor Member</p>
 
             <div className="divider my-2" />
 
-            {/* User Information */}
             <div className="w-full space-y-4">
               <div>
                 <label className="mb-2 block text-sm font-semibold text-base-content/70">
@@ -116,12 +104,11 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* Back Home */}
-            <Link
-              href="/"
-              className="btn btn-success mt-5 w-full"
-            >
+            <Link href="/" className="btn btn-success mt-5 w-full">
               ← হোম পেজে ফিরে যান
+            </Link>
+            <Link href="/profile/update-info" className="btn mt-5 w-full">
+              ← তথ্য পরিবর্তন করুন
             </Link>
           </div>
         </div>

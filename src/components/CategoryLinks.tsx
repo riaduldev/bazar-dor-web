@@ -1,20 +1,15 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ICategory } from "./Navbar";
 
-
-
 const CategoryLinks = ({ categories }: { categories: ICategory[] }) => {
   const pathname = usePathname();
 
-  const activeClass =
-    "bg-success text-white shadow-sm";
+  const activeClass = "bg-success text-white shadow-sm";
 
-  const inactiveClass =
-    "text-gray-600 hover:bg-success/10 hover:text-success";
+  const inactiveClass = "text-gray-600 hover:bg-success/10 hover:text-success";
 
   return (
     <div className="border-t border-gray-100">
@@ -23,15 +18,11 @@ const CategoryLinks = ({ categories }: { categories: ICategory[] }) => {
         className="mx-auto max-w-6xl px-2 sm:px-4"
       >
         <div className="flex w-full items-center gap-1 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex-wrap md:justify-center">
-
-
-          {/* Category Links */}
           {categories?.map((item) => {
             const href = `/category/${item.slug}`;
 
             const isActive =
-              pathname === href ||
-              pathname.startsWith(`${href}/`);
+              pathname === href || pathname.startsWith(`${href}/`);
 
             return (
               <Link

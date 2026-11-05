@@ -1,12 +1,9 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Category, Product } from "@/types/bazardor";
 import ProductCard from "@/components/products/ProductCard";
-
-
 
 type SortOption = "default" | "low-to-high" | "high-to-low";
 
@@ -23,7 +20,6 @@ export default function CategoryProducts({
 }: CategoryProductsProps) {
   const [sortBy, setSortBy] = useState<SortOption>("default");
 
-  // Sort products by today's price
   const sortedProducts = useMemo(() => {
     const sorted = [...products];
 
@@ -43,10 +39,7 @@ export default function CategoryProducts({
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-
-      {/* Category Header */}
       <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
         <div className="flex items-center gap-4">
           <div className="grid size-16 shrink-0 place-items-center rounded-2xl border border-green-200 bg-green-50 text-4xl sm:size-20 sm:text-5xl">
             {categoryIcon}
@@ -63,7 +56,6 @@ export default function CategoryProducts({
           </div>
         </div>
 
-        {/* Sort Control */}
         <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
           <label
             htmlFor="product-sort"
@@ -75,37 +67,27 @@ export default function CategoryProducts({
           <select
             id="product-sort"
             value={sortBy}
-            onChange={(e) =>
-              setSortBy(e.target.value as SortOption)
-            }
+            onChange={(e) => setSortBy(e.target.value as SortOption)}
             className="select select-bordered w-full bg-base-100 sm:w-64"
           >
             <option value="default">ডিফল্ট</option>
-            <option value="low-to-high">
-              দাম: কম থেকে বেশি
-            </option>
-            <option value="high-to-low">
-              দাম: বেশি থেকে কম
-            </option>
+            <option value="low-to-high">দাম: কম থেকে বেশি</option>
+            <option value="high-to-low">দাম: বেশি থেকে কম</option>
           </select>
         </div>
       </div>
 
-      {/* Product Count */}
       {!isError && products.length > 0 && (
         <p className="mb-5 text-sm text-base-content/60">
           মোট {products.length.toLocaleString("bn-BD")} টি পণ্য পাওয়া গেছে
         </p>
       )}
 
-      {/* API Error */}
       {isError ? (
         <div className="flex min-h-[350px] flex-col items-center justify-center rounded-3xl border border-dashed border-base-300 px-5 text-center">
           <span className="text-6xl">⚠️</span>
 
-          <h2 className="mt-5 text-xl font-bold">
-            তথ্য লোড করা যায়নি!
-          </h2>
+          <h2 className="mt-5 text-xl font-bold">তথ্য লোড করা যায়নি!</h2>
 
           <p className="mt-2 text-sm text-base-content/60">
             ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।
@@ -116,10 +98,7 @@ export default function CategoryProducts({
           </Link>
         </div>
       ) : products.length === 0 ? (
-
-        /* Empty State */
         <div className="flex min-h-[400px] flex-col items-center justify-center rounded-3xl border border-dashed border-base-300 bg-base-200/30 px-5 text-center">
-
           <div className="grid size-24 place-items-center rounded-full bg-base-200 text-5xl">
             {categoryIcon}
           </div>
@@ -141,20 +120,15 @@ export default function CategoryProducts({
             হোম পেজে ফিরে যান
           </Link>
         </div>
-
       ) : (
-
-        /* Products Grid */
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {sortedProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
+            <Link key={product.id} href={`/products/${product.slug}`}>
+              <ProductCard product={product} />
+            </Link>
           ))}
         </div>
       )}
-
     </main>
   );
 }

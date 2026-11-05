@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
@@ -6,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient, signIn } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -20,7 +18,6 @@ const SignUpPage = () => {
     "google" | "github" | null
   >(null);
 
-  // Email and Password Signup
   const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -55,10 +52,7 @@ const SignUpPage = () => {
     }
   };
 
-  // Google / GitHub Signup
-  const handleSocialSignup = async (
-    provider: "google" | "github"
-  ) => {
+  const handleSocialSignup = async (provider: "google" | "github") => {
     setSocialLoading(provider);
 
     try {
@@ -79,27 +73,17 @@ const SignUpPage = () => {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-base-200 px-4 py-10">
-
       <div className="w-full max-w-sm">
-
-        {/* Heading */}
         <div className="text-center mb-5">
-          <h1 className="text-2xl font-bold">
-            অ্যাকাউন্ট তৈরি করুন
-          </h1>
+          <h1 className="text-2xl font-bold">অ্যাকাউন্ট তৈরি করুন</h1>
 
           <p className="text-sm text-base-content/60 mt-2">
             বিনামূল্যে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
           </p>
         </div>
 
-        {/* Signup Form */}
         <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-5 sm:p-6 shadow-sm">
-
-
           <form onSubmit={handleSignUp} className="space-y-2">
-
-            {/* Name */}
             <label className="label">নাম</label>
             <input
               type="text"
@@ -111,7 +95,6 @@ const SignUpPage = () => {
               required
             />
 
-            {/* Email */}
             <label className="label">ইমেইল</label>
             <input
               type="email"
@@ -123,7 +106,6 @@ const SignUpPage = () => {
               required
             />
 
-            {/* Password */}
             <label className="label">পাসওয়ার্ড</label>
             <input
               type="password"
@@ -136,7 +118,6 @@ const SignUpPage = () => {
               required
             />
 
-            {/* Confirm Password */}
             <label className="label">পাসওয়ার্ড নিশ্চিত করুন</label>
             <input
               type="password"
@@ -148,7 +129,6 @@ const SignUpPage = () => {
               required
             />
 
-            {/* Signup Button */}
             <button
               type="submit"
               disabled={loading || !!socialLoading}
@@ -162,12 +142,8 @@ const SignUpPage = () => {
             </button>
           </form>
 
-          {/* Divider */}
-          <div className="divider text-xs text-base-content/60">
-            অথবা
-          </div>
+          <div className="divider text-xs text-base-content/60">অথবা</div>
 
-          {/* Google Signup */}
           <button
             type="button"
             disabled={loading || !!socialLoading}
@@ -184,7 +160,6 @@ const SignUpPage = () => {
             )}
           </button>
 
-          {/* GitHub Signup */}
           <button
             type="button"
             disabled={loading || !!socialLoading}
@@ -207,19 +182,14 @@ const SignUpPage = () => {
             )}
           </button>
 
-          {/* Signin Link */}
           <p className="text-center text-sm mt-5">
             অ্যাকাউন্ট আছে?{" "}
-            <Link
-              href="/signin"
-              className="link link-success font-semibold"
-            >
+            <Link href="/signin" className="link link-success font-semibold">
               সাইন ইন করুন
             </Link>
           </p>
         </fieldset>
 
-        {/* Back to Home */}
         <div className="text-center mt-5">
           <Link
             href="/"
@@ -228,7 +198,6 @@ const SignUpPage = () => {
             ← হোম পেজে ফিরে যান
           </Link>
         </div>
-
       </div>
     </main>
   );

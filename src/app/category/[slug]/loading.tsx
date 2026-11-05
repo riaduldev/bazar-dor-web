@@ -1,11 +1,8 @@
-
 export default function CategoryLoading() {
   return (
     <main className="mx-auto min-h-screen w-full max-w-7xl animate-pulse px-4 py-8 sm:px-6 lg:px-8">
-
-      {/* Header Skeleton */}
+      
       <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
         <div className="flex items-center gap-4">
           <div className="size-16 rounded-2xl bg-base-300 sm:size-20" />
 
@@ -18,14 +15,13 @@ export default function CategoryLoading() {
         <div className="h-12 w-full rounded-xl bg-base-300 sm:w-64" />
       </div>
 
-      {/* Loading Text */}
+      
       <p className="mb-5 text-sm font-medium text-base-content/60">
         পণ্য লোড হচ্ছে...
       </p>
 
-      {/* Product Skeleton */}
+      
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
-
         {Array.from({ length: 8 }).map((_, index) => (
           <div
             key={index}
@@ -45,7 +41,6 @@ export default function CategoryLoading() {
             </div>
           </div>
         ))}
-
       </div>
     </main>
   );

@@ -17,7 +17,6 @@ const todayDate = new Intl.DateTimeFormat("bn-BD", {
   timeZone: "Asia/Dhaka",
 }).format(new Date());
 
-// Fetch Categories
 const getCategories = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
     next: { revalidate: 60 },
@@ -28,7 +27,6 @@ const getCategories = async () => {
 
 const Navbar = async () => {
   const categories = await getCategories();
-  // console.log(categories);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-md">
@@ -59,17 +57,16 @@ const Navbar = async () => {
             </div>
           </Link>
 
-          {/* User Account */}
           <div className="shrink-0">
             <UserDropdown />
           </div>
         </div>
       </nav>
-      {/* Categories Links*/}
+
       <div>
         <CategoryLinks categories={categories} />
       </div>
-      {/* text marquee  */}
+
       <PriceMarquee></PriceMarquee>
     </header>
   );

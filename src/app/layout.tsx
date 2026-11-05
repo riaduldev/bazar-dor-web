@@ -27,12 +27,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <ToastContainer position="top-center"/>
+        <ToastContainer position="top-center" />
         <Navbar />
-        <main>
-          {children}
-        </main>
-        <Footer/>
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

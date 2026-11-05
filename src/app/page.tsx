@@ -4,7 +4,7 @@ import CategoriesProducts from "@/components/CategoriesProducts";
 export default function Home() {
   return (
     <div>
-      <BannerSection/>
+      <BannerSection />
       <CategoriesProducts></CategoriesProducts>
     </div>
   );
