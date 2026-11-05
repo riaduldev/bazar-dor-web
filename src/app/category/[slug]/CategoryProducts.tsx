@@ -68,7 +68,7 @@ export default function CategoryProducts({
             id="product-sort"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="select select-bordered w-full bg-base-100 sm:w-64"
+            className="select select-bordered w-full bg-base-100 sm:w-64 flex justify-center items-center"
           >
             <option value="default">ডিফল্ট</option>
             <option value="low-to-high">দাম: কম থেকে বেশি</option>

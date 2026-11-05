@@ -19,7 +19,7 @@ interface Product {
   };
 }
 
-const API_URL = "https://openapi.programming-hero.com/api/bazardor/products";
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/products`;
 
 const formatPrice = (price: number) =>
   new Intl.NumberFormat("bn-BD").format(price);
@@ -74,7 +74,6 @@ async function getProducts(): Promise<Product[]> {
 const ProductCard = ({ product }: { product: Product }) => {
   const isUp = product.change.dir === "up";
   const isDown = product.change.dir === "down";
-  const isFlat = product.change.dir === "flat";
 
   const badgeColor = isUp
     ? "bg-green-100 text-green-700"
@@ -86,40 +85,44 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   return (
     <Link
-      href={`/product/${product.slug}`}
-      className="group flex h-full flex-col rounded-xl border border-base-300 bg-base-100 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-400 hover:shadow-md sm:p-5"
+      href={`/products/${product.slug}`}
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-base-300 bg-base-100 p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-400 hover:shadow-md sm:p-4 lg:p-5"
     >
-      <div className="mb-4 flex h-28 items-center justify-center rounded-lg bg-base-200 text-5xl transition-transform duration-300 group-hover:scale-105 sm:h-32 sm:text-6xl">
-        {product.image || product.categoryIcon || "🛒"}
+      <div className="mb-3 flex h-24 min-w-0 items-center justify-center overflow-hidden rounded-lg bg-base-200 text-4xl transition-transform duration-300 group-hover:scale-[1.02] sm:mb-4 sm:h-32 sm:text-5xl lg:text-6xl">
+        <span className="max-w-full truncate">
+          {product.image || product.categoryIcon || "🛒"}
+        </span>
       </div>
 
-      <div className="flex flex-1 flex-col">
-        <div className="mb-2">
-          <span className="text-xs font-medium text-base-content/50">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="mb-3 min-w-0">
+          <span className="block truncate text-[11px] font-medium text-base-content/50 sm:text-xs">
             {product.categoryIcon} {product.categoryNameBn}
           </span>
 
-          <h3 className="mt-1 line-clamp-1 text-base font-bold text-base-content sm:text-lg">
+          <h3 className="mt-1 line-clamp-2 break-words text-sm font-bold leading-snug text-base-content sm:text-base lg:text-lg">
             {product.nameBn}
           </h3>
 
-          <p className="mt-1 text-xs text-base-content/60">
+          <p className="mt-1 text-[11px] text-base-content/60 sm:text-xs">
             {formatUnit(product.unit)}
           </p>
         </div>
 
         <div className="mt-auto border-t border-base-300 pt-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <p className="text-xs text-base-content/60">আজকের দাম</p>
+          <div className="flex min-w-0 flex-col items-start justify-between gap-2 min-[420px]:flex-row min-[420px]:items-center">
+            <div className="min-w-0">
+              <p className="text-[11px] text-base-content/60 sm:text-xs">
+                আজকের দাম
+              </p>
 
-              <p className="mt-1 text-lg font-bold text-base-content sm:text-xl">
+              <p className="mt-1 break-words text-base font-bold leading-tight text-base-content sm:text-lg lg:text-xl">
                 {formatPrice(product.today)} টাকা
               </p>
             </div>
 
             <span
-              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${badgeColor}`}
+              className={`inline-flex max-w-full shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[10px] font-bold sm:px-2.5 sm:text-xs ${badgeColor}`}
             >
               {arrow}
               {formatPrice(Math.abs(product.change.pct))}%
@@ -147,16 +150,21 @@ const ProductGrid = ({
   if (!products.length) return null;
 
   return (
-    <section className="py-8 sm:py-10">
-      <div className="mb-5 flex flex-col gap-2 sm:mb-6">
-        <h2 className="text-xl font-bold text-base-content sm:text-2xl">
-          <span className={iconColor}>{icon}</span> {title}
+    <section className="py-6 sm:py-8 lg:py-10">
+      <div className="mb-4 min-w-0 space-y-2 sm:mb-6">
+        <h2 className="flex flex-wrap items-center gap-2 text-lg font-bold text-base-content sm:text-xl lg:text-2xl">
+          <span className={iconColor}>{icon}</span>
+          {title}
         </h2>
 
-        {subtitle && <p className="text-sm text-base-content/60">{subtitle}</p>}
+        {subtitle && (
+          <p className="max-w-2xl text-xs leading-relaxed text-base-content/60 sm:text-sm">
+            {subtitle}
+          </p>
+        )}
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid min-w-0 grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -179,7 +187,7 @@ const ProductSections = async () => {
     .slice(0, 6);
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:py-8">
+    <main className="mx-auto w-full max-w-7xl min-w-0 px-3 py-5 sm:px-5 sm:py-7 lg:px-6 lg:py-8">
       <ProductGrid
         title="আজ দাম বেড়েছে"
         icon="▲"
@@ -194,7 +202,7 @@ const ProductSections = async () => {
         products={fallers}
       />
 
-      <section id="সব-পণ্য" className="scroll-mt-40">
+      <section id="সব-পণ্য" className="scroll-mt-24 sm:scroll-mt-32">
         <ProductGrid
           title="সব পণ্য"
           products={products}
