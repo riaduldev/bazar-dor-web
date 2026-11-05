@@ -6,6 +6,10 @@ const client = new MongoClient(process.env.BETTER_AUTH_DB_URI as string);
 const db = client.db("bazar-dor");
 
 export const auth = betterAuth({
+  trustedOrigins: [
+    "http://localhost:3000", 
+    "https://bazar-dor-web.vercel.app",
+  ],
   emailAndPassword: {
     enabled: true,
   },
