@@ -26,7 +26,6 @@ const getCategories = async () => {
   return res.json();
 };
 
-
 const Navbar = async () => {
   const categories = await getCategories();
   // console.log(categories);
@@ -38,14 +37,16 @@ const Navbar = async () => {
         <div className="flex min-h-[68px] items-center justify-between gap-2 sm:min-h-[76px]">
           {/* Logo + Brand */}
           <Link href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
-            <Image
-              src="/logo-icon.png"
-              alt="বাজার দর লোগো"
-              width={42}
-              height={42}
-              priority
-              className="h-9 w-9 shrink-0 object-contain sm:h-11 sm:w-11"
-            />
+            <div className="shrink-0 border-green-600 bg-green-50 p-1 shadow-sm">
+              <Image
+                src="/logo-icon.png"
+                alt="বাজার দর লোগো"
+                width={42}
+                height={42}
+                priority
+                className="h-9 w-9 object-contain sm:h-11 sm:w-11"
+              />
+            </div>
 
             <div className="min-w-0">
               <h1 className="truncate text-lg font-extrabold tracking-tight text-gray-900 sm:text-xl">
@@ -63,7 +64,7 @@ const Navbar = async () => {
             <UserDropdown />
           </div>
         </div>
-        </nav>
+      </nav>
       {/* Categories Links*/}
       <div>
         <CategoryLinks categories={categories} />
