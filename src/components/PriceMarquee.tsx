@@ -106,6 +106,7 @@ function PriceItems({
               <span aria-hidden="true">{arrow}</span>
               {formatNumber(Math.abs(product.change?.pct ?? 0))}%
             </span>
+            <span className="font-bold mx-2 text-2xl">•</span>
           </Link>
         );
       })}

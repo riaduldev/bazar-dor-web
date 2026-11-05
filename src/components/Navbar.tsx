@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import UserDropdown from "./UserDropdown";
 import CategoryLinks from "./CategoryLinks";
+import PriceMarquee from "./PriceMarquee";
 
 export interface ICategory {
   id: string;
@@ -67,6 +68,8 @@ const Navbar = async () => {
       <div>
         <CategoryLinks categories={categories} />
       </div>
+      {/* text marquee  */}
+      <PriceMarquee></PriceMarquee>
     </header>
   );
 };
