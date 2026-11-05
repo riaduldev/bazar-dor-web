@@ -154,7 +154,7 @@ const SignUpPage = () => {
               <span className="loading loading-spinner loading-sm" />
             ) : (
               <>
-                <span className="text-lg font-bold text-red-500">G</span>
+                
                 Google দিয়ে চালিয়ে যান
               </>
             )}
@@ -170,13 +170,7 @@ const SignUpPage = () => {
               <span className="loading loading-spinner loading-sm" />
             ) : (
               <>
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5 fill-current"
-                  aria-hidden="true"
-                >
-                  <path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.77-.24.77-.54v-2.08c-3.14.68-3.8-1.33-3.8-1.33-.5-1.3-1.24-1.65-1.24-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1 2.01.14 3.03.14-.78.15-1.48.6-1.9 1.28-.8-.42-1.67-.63-2.57-.63-.56 0-.98.3-.98.82 0 .52.42.83.98.83 1.12 0 2.02-.3 2.02-.3s.18-.06.36.14c.18.2.1.4.1.4v1.72c0 .35.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" />
-                </svg>
+                
                 GitHub দিয়ে চালিয়ে যান
               </>
             )}
