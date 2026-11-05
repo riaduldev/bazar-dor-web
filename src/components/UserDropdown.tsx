@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -94,10 +93,18 @@ const UserDropdown = () => {
           </>
         ) : (
           <>
-            <span className="text-base">👤</span>
-            <span className="text-xs font-semibold sm:text-sm">
-              Account
-            </span>
+            <div className="avatar">
+              <div className="w-12">
+                <Image
+                  width={48}
+                  height={48}
+                  className="rounded-full"
+                  alt="Tailwind-CSS-Avatar-component"
+                  src="https://img.daisyui.com/images/profile/demo/batperson@192.webp"
+                />
+              </div>
+            </div>
+            <span className="text-xs font-semibold sm:text-sm">Account</span>
             <span className="text-xs">▼</span>
           </>
         )}
@@ -129,7 +136,7 @@ const UserDropdown = () => {
             <li>
               <Link
                 href="/profile"
-                className="rounded-lg py-3 text-sm font-medium"
+                className="rounded-lg py-3 text-sm font-medium text-black"
               >
                 <span>👤</span>
                 আমার প্রোফাইল
@@ -167,10 +174,7 @@ const UserDropdown = () => {
             </li>
 
             <li>
-              <Link
-                href="/signup"
-                className="btn btn-success mt-2 text-white"
-              >
+              <Link href="/signup" className="btn btn-success mt-2 text-white">
                 <span>✨</span>
                 সাইন আপ
               </Link>

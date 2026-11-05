@@ -26,8 +26,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <ToastContainer />
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <ToastContainer position="top-center"/>
         <Navbar />
         <PriceMarquee></PriceMarquee>
         {children}

@@ -5,46 +5,4 @@
  }
 
 
-
  
-.price-marquee-track {
-  animation: bazardor-marquee 45s linear infinite;
-  will-change: transform;
-}
-
-.price-marquee-group {
-  gap: 20px;
-  padding-right: 20px;
-}
-
-.price-marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes bazardor-marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (max-width: 640px) {
-  .price-marquee-group {
-    gap: 14px;
-    padding-right: 14px;
-  }
-
-  .price-marquee-track {
-    animation-duration: 35s;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .price-marquee-track {
-    animation: none;
-    will-change: auto;
-  }
-}

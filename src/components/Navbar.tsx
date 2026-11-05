@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import UserDropdown from "./UserDropdown";
-import CategoryLinks, { Category } from "./CategoryLinks";
+
 
 
 const todayDate = new Intl.DateTimeFormat("bn-BD", {
@@ -12,51 +12,9 @@ const todayDate = new Intl.DateTimeFormat("bn-BD", {
 }).format(new Date());
 
 // Fetch Categories
-const getData = async (): Promise<Category[]> => {
-  try {
-    const res = await fetch(
-      "https://openapi.programming-hero.com/api/bazardor/categories",
-      {
-        cache: "no-store",
-      }
-    );
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch categories");
-    }
-
-    const result: unknown = await res.json();
-
-    // Handle direct array response
-    if (Array.isArray(result)) {
-      return result as Category[];
-    }
-
-    // Handle object response
-    if (result && typeof result === "object") {
-      const response = result as {
-        data?: unknown;
-        categories?: unknown;
-      };
-
-      if (Array.isArray(response.data)) {
-        return response.data as Category[];
-      }
-
-      if (Array.isArray(response.categories)) {
-        return response.categories as Category[];
-      }
-    }
-
-    return [];
-  } catch (error) {
-    console.error("Category API Error:", error);
-    return [];
-  }
-};
 
 const Navbar = async () => {
-  const categories = await getData();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-md">
@@ -98,8 +56,6 @@ const Navbar = async () => {
         </div>
       </nav>
 
-      {/* Category Navigation */}
-      <CategoryLinks categories={categories} />
 
     </header>
   );

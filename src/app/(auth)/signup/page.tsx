@@ -4,7 +4,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 
 
@@ -62,7 +62,7 @@ const SignUpPage = () => {
     setSocialLoading(provider);
 
     try {
-      const { error } = await authClient.signIn.social({
+      const { error } = await signIn.social({
         provider,
         callbackURL: "/",
       });
@@ -96,9 +96,6 @@ const SignUpPage = () => {
         {/* Signup Form */}
         <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-5 sm:p-6 shadow-sm">
 
-          <legend className="fieldset-legend text-base">
-            Sign Up
-          </legend>
 
           <form onSubmit={handleSignUp} className="space-y-2">
 
