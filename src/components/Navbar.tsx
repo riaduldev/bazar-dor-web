@@ -1,10 +1,15 @@
-
 import Image from "next/image";
 import Link from "next/link";
 
 import UserDropdown from "./UserDropdown";
+import CategoryLinks from "./CategoryLinks";
 
-
+export interface ICategory {
+  id: string;
+  slug: string;
+  nameBn: string;
+  icon?: string;
+}
 
 const todayDate = new Intl.DateTimeFormat("bn-BD", {
   dateStyle: "full",
@@ -12,23 +17,26 @@ const todayDate = new Intl.DateTimeFormat("bn-BD", {
 }).format(new Date());
 
 // Fetch Categories
+const getCategories = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
+    next: { revalidate: 60 },
+  });
+
+  return res.json();
+};
 
 
 const Navbar = async () => {
+  const categories = await getCategories();
+  // console.log(categories);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-md">
-
       {/* Top Navbar */}
       <nav className="mx-auto max-w-6xl px-3 sm:px-4">
-
         <div className="flex min-h-[68px] items-center justify-between gap-2 sm:min-h-[76px]">
-
           {/* Logo + Brand */}
-          <Link
-            href="/"
-            className="flex min-w-0 items-center gap-2 sm:gap-3"
-          >
+          <Link href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
             <Image
               src="/logo-icon.png"
               alt="বাজার দর লোগো"
@@ -54,9 +62,11 @@ const Navbar = async () => {
             <UserDropdown />
           </div>
         </div>
-      </nav>
-
-
+        </nav>
+      {/* Categories Links*/}
+      <div>
+        <CategoryLinks categories={categories} />
+      </div>
     </header>
   );
 };
