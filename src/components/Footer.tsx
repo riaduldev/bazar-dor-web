@@ -6,7 +6,7 @@ const Footer = () => {
           className="flex flex-col items-center gap-3 text-center text-sm sm:text-base
                         md:flex-row md:items-center md:justify-between md:gap-6 md:text-left"
         >
-          <p className="font-semibold text-base-content/70 leading-relaxed">
+          <p className="text-base-content/70 leading-relaxed">
             বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।
           </p>
 
