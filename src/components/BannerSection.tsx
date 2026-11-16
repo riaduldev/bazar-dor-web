@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const todayDate = new Intl.DateTimeFormat("bn-BD", {
-  weekday: "long",
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  timeZone: "Asia/Dhaka",
-}).format(new Date());
-
 const BannerSection = () => {
+  const todayDate = new Intl.DateTimeFormat("bn-BD", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Asia/Dhaka",
+  }).format(new Date());
+
   return (
     <section className="bg-base-200 px-4 py-10 sm:py-14 lg:py-16">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-12">

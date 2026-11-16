@@ -58,7 +58,7 @@ const UserDropdown = () => {
       <button
         type="button"
         tabIndex={0}
-        className="btn btn-ghost btn-sm sm:btn-md flex max-w-[170px] items-center gap-2 rounded-full px-2 sm:px-3"
+        className="btn btn-ghost flex h-auto min-h-9 max-w-[170px] items-center gap-2 rounded-full px-2 py-1 sm:px-3"
         aria-label="Account menu"
       >
         {user ? (
@@ -93,11 +93,11 @@ const UserDropdown = () => {
         ) : (
           <>
             <div className="avatar">
-              <div className="w-12">
+              <div className="h-9 w-9">
                 <Image
-                  width={48}
-                  height={48}
-                  className="rounded-full"
+                  width={36}
+                  height={36}
+                  className="rounded-full object-cover"
                   alt="Tailwind-CSS-Avatar-component"
                   src="https://img.daisyui.com/images/profile/demo/batperson@192.webp"
                 />

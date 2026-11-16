@@ -202,7 +202,7 @@ const ProductSections = async () => {
         products={fallers}
       />
 
-      <section id="সব-পণ্য" className="scroll-mt-24 sm:scroll-mt-32">
+      <section id="সব-পণ্য" className="scroll-mt-44 sm:scroll-mt-48">
         <ProductGrid
           title="সব পণ্য"
           products={products}

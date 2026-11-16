@@ -7,7 +7,10 @@ const db = client.db("bazar-dor");
 
 export const auth = betterAuth({
   trustedOrigins: [
-    "http://localhost:3000", 
+    ...(process.env.NODE_ENV === "development"
+      ? ["http://localhost:*", "http://127.0.0.1:*"]
+      : []),
+    "http://localhost:3000",
     "https://bazar-dor-web-beta.vercel.app",
   ],
   emailAndPassword: {

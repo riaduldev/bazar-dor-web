@@ -155,7 +155,10 @@ const SignInPage = () => {
 
           <p className="text-center text-sm mt-5">
             নতুন অ্যাকাউন্ট তৈরি করতে চান?{" "}
-            <Link href="/signup" className="link link-success font-semibold">
+            <Link
+              href="/signup"
+              className="link link-success inline-block rounded py-1 font-semibold"
+            >
               সাইন আপ করুন
             </Link>
           </p>
@@ -164,7 +167,7 @@ const SignInPage = () => {
         <div className="text-center mt-5">
           <Link
             href="/"
-            className="text-sm text-base-content/50 hover:text-success"
+            className="inline-block rounded py-2 text-sm text-base-content/50 hover:text-success"
           >
             ← হোম পেজে ফিরে যান
           </Link>

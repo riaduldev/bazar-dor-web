@@ -5,9 +5,28 @@ import { notFound, redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 
 import type { Product } from "@/types/bazardor";
-import { toast } from "react-toastify";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
+
+function extractProducts(result: unknown): Product[] {
+  if (Array.isArray(result)) {
+    return result as Product[];
+  }
+
+  if (result && typeof result === "object") {
+    const payload = result as { data?: unknown; products?: unknown };
+
+    if (Array.isArray(payload.data)) {
+      return payload.data as Product[];
+    }
+
+    if (Array.isArray(payload.products)) {
+      return payload.products as Product[];
+    }
+  }
+
+  return [];
+}
 
 export default async function ProductDetailsPage({
   params,
@@ -32,7 +51,7 @@ export default async function ProductDetailsPage({
     throw new Error("Products fetch failed");
   }
 
-  const allProducts: Product[] = await productsResponse.json();
+  const allProducts = extractProducts(await productsResponse.json());
 
   const selectedProduct = allProducts.find((item) => item.slug === slug);
 
@@ -50,10 +69,11 @@ export default async function ProductDetailsPage({
   }
 
   if (!productResponse.ok) {
-    toast.warning("Product details fetch failed");
+    throw new Error("Product details fetch failed");
   }
 
   const product: Product = await productResponse.json();
+  const markets = product.markets ?? [];
 
   let unitText = `প্রতি ${product.unit}`;
 
@@ -71,11 +91,11 @@ export default async function ProductDetailsPage({
   let maxPrice = 0;
   let totalAverage = 0;
 
-  if (product.markets.length > 0) {
-    minPrice = product.markets[0].min;
-    maxPrice = product.markets[0].max;
+  if (markets.length > 0) {
+    minPrice = markets[0].min;
+    maxPrice = markets[0].max;
 
-    for (const market of product.markets) {
+    for (const market of markets) {
       if (market.min < minPrice) {
         minPrice = market.min;
       }
@@ -92,8 +112,8 @@ export default async function ProductDetailsPage({
 
   let averagePrice = 0;
 
-  if (product.markets.length > 0) {
-    averagePrice = totalAverage / product.markets.length;
+  if (markets.length > 0) {
+    averagePrice = totalAverage / markets.length;
   }
 
   const priceDifference = product.today - product.yesterday;
@@ -117,7 +137,10 @@ export default async function ProductDetailsPage({
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6 flex flex-wrap items-center gap-2 text-sm">
-        <Link href="/" className="text-base-content/60 hover:text-green-700">
+        <Link
+          href="/"
+          className="-mx-1 rounded px-1 py-1.5 text-base-content/60 hover:text-green-700"
+        >
           হোম
         </Link>
 
@@ -125,7 +148,7 @@ export default async function ProductDetailsPage({
 
         <Link
           href={`/category/${product.category}`}
-          className="text-base-content/60 hover:text-green-700"
+          className="-mx-1 rounded px-1 py-1.5 text-base-content/60 hover:text-green-700"
         >
           {product.categoryNameBn}
         </Link>
@@ -137,7 +160,7 @@ export default async function ProductDetailsPage({
 
       <section className="mb-6 rounded-2xl border border-base-200 bg-base-100 p-5 shadow-sm sm:p-7">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-          <div className="grid size-24 shrink-0 place-items-center rounded-2xl bg-green-50 text-6xl">
+          <div className="grid size-24 shrink-0 place-items-center overflow-hidden rounded-2xl bg-green-50 text-6xl">
             {product.image || product.categoryIcon || "🛒"}
           </div>
 
@@ -155,7 +178,7 @@ export default async function ProductDetailsPage({
             </div>
 
             <p className="mt-3 text-sm text-base-content/60">
-              {product.markets.length.toLocaleString("bn-BD")} টি বাজারের আজকের
+              {markets.length.toLocaleString("bn-BD")} টি বাজারের আজকের
               দাম এক জায়গায় তুলনা করুন।
             </p>
 
@@ -191,7 +214,7 @@ export default async function ProductDetailsPage({
             </p>
 
             <h3 className="mt-3 text-2xl font-extrabold text-green-700">
-              {product.markets.length > 0
+              {markets.length > 0
                 ? `৳${minPrice.toLocaleString("bn-BD")}`
                 : "তথ্য নেই"}
             </h3>
@@ -205,7 +228,7 @@ export default async function ProductDetailsPage({
             </p>
 
             <h3 className="mt-3 text-2xl font-extrabold text-error">
-              {product.markets.length > 0
+              {markets.length > 0
                 ? `৳${maxPrice.toLocaleString("bn-BD")}`
                 : "তথ্য নেই"}
             </h3>
@@ -217,7 +240,7 @@ export default async function ProductDetailsPage({
             <p className="text-sm font-medium text-base-content/60">গড় দাম</p>
 
             <h3 className="mt-3 text-2xl font-extrabold text-green-700">
-              {product.markets.length > 0
+              {markets.length > 0
                 ? `৳${averagePrice.toLocaleString("bn-BD", {
                     maximumFractionDigits: 2,
                   })}`
@@ -240,7 +263,7 @@ export default async function ProductDetailsPage({
           </p>
         </div>
 
-        {product.markets.length > 0 ? (
+        {markets.length > 0 ? (
           <div className="overflow-x-auto rounded-2xl border border-base-200 bg-base-100 shadow-sm">
             <table className="table table-zebra">
               <thead>
@@ -254,7 +277,7 @@ export default async function ProductDetailsPage({
               </thead>
 
               <tbody>
-                {product.markets.map((market, index) => {
+                {markets.map((market, index) => {
                   const marketAverage = (market.min + market.max) / 2;
 
                   return (

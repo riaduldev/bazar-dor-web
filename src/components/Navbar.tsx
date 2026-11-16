@@ -12,21 +12,47 @@ export interface ICategory {
   icon?: string;
 }
 
-const todayDate = new Intl.DateTimeFormat("bn-BD", {
-  dateStyle: "full",
-  timeZone: "Asia/Dhaka",
-}).format(new Date());
+const getCategories = async (): Promise<ICategory[]> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
+      next: { revalidate: 60 },
+    });
 
-const getCategories = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
-    next: { revalidate: 60 },
-  });
+    if (!res.ok) {
+      return [];
+    }
 
-  return res.json();
+    const result: unknown = await res.json();
+
+    if (Array.isArray(result)) {
+      return result as ICategory[];
+    }
+
+    if (result && typeof result === "object") {
+      const payload = result as { data?: unknown; categories?: unknown };
+
+      if (Array.isArray(payload.data)) {
+        return payload.data as ICategory[];
+      }
+
+      if (Array.isArray(payload.categories)) {
+        return payload.categories as ICategory[];
+      }
+    }
+
+    return [];
+  } catch {
+    return [];
+  }
 };
 
 const Navbar = async () => {
   const categories = await getCategories();
+
+  const todayDate = new Intl.DateTimeFormat("bn-BD", {
+    dateStyle: "full",
+    timeZone: "Asia/Dhaka",
+  }).format(new Date());
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-md">

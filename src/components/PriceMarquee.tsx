@@ -15,7 +15,6 @@ interface Product {
 }
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/products`;
-console.log(API_URL);
 
 const formatNumber = (value: number) =>
   new Intl.NumberFormat("bn-BD", {

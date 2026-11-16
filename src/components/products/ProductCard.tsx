@@ -32,7 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     <article className="card h-full border border-base-200 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className="card-body gap-3 p-4 sm:p-5">
         <div className="flex items-start justify-between gap-2">
-          <div className="grid size-16 shrink-0 place-items-center rounded-2xl bg-green-50 text-4xl">
+          <div className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-2xl bg-green-50 text-4xl">
             {product.image || product.categoryIcon || "🛒"}
           </div>
 
