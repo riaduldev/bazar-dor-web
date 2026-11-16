@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { authClient, signIn } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 
+
 const SignUpPage = () => {
   const router = useRouter();
 
@@ -44,7 +45,7 @@ const SignUpPage = () => {
       }
 
       toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
-      router.push("/signin");
+      router.push("/");
     } catch {
       toast.error("কিছু একটা সমস্যা হয়েছে!");
     } finally {
